@@ -1,15 +1,32 @@
 #(©)Codexbotz
-
+import os
 import asyncio
 from pyrogram import filters, Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import FloodWait
 
 from bot import Bot
-from config import ADMINS, CHANNEL_ID, DISABLE_CHANNEL_BUTTON
+from config import ADMINS, CHANNEL_ID, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
 from helper_func import encode
 
-@Bot.on_message(filters.private & filters.user(ADMINS) & ~filters.command(['start','users','broadcast','batch','genlink','stats']))
+@Bot.on_message(filters.private & filters.user(ADMINS) & filters.command("setforcesub"))
+async def setCommand(client: Client, message: Message):
+    try:
+        channel_id = message.text.split(maxsplit=1)[1]
+    except IndexError:
+        await message.reply_text("Provide a force sub id to update.")
+        return
+    os.environ["FORCE_SUB_CHANNEL"] = channel_id
+    await message.reply_text(f"Force Sub Updated to {channel_id}")
+
+@Bot.on_message(filters.private & filters.user(ADMINS) & filters.command("toggleprotect"))
+async def setCommand(client: Client, message: Message):
+    protectOn = PROTECT_CONTENT()
+    os.environ["PROTECT_CONTENT"] = str(not protectOn)
+    await message.reply_text(f"Protect changed to `{not protectOn}`")
+
+
+@Bot.on_message(filters.private & filters.user(ADMINS) & ~filters.command(['start','users','broadcast','batch','genlink','stats', 'setforcesub', 'toggleprotect']))
 async def channel_post(client: Client, message: Message):
     reply_text = await message.reply_text("Please Wait...!", quote = True)
     try:
