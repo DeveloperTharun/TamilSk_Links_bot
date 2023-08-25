@@ -20,13 +20,13 @@ async def setCommand(client: Client, message: Message):
     await message.reply_text(f"Force Sub Updated to {channel_id}")
 
 @Bot.on_message(filters.private & filters.user(ADMINS) & filters.command("toggleprotect"))
-async def setCommand(client: Client, message: Message):
+async def setProtect(client: Client, message: Message):
     protectOn = PROTECT_CONTENT()
     os.environ["PROTECT_CONTENT"] = str(not protectOn)
     await message.reply_text(f"Protect changed to `{not protectOn}`")
 
 
-@Bot.on_message(filters.private & filters.user(ADMINS) & ~filters.command(['start','users','broadcast','batch','genlink','stats', 'setforcesub', 'toggleprotect']))
+@Bot.on_message(filters.private & filters.user(ADMINS) & ~filters.command(['start','users','broadcast','batch','genlink','stats', 'setforcesub', 'toggleprotect'] & ~filters.regex("^/setforcesub(.*)")))
 async def channel_post(client: Client, message: Message):
     reply_text = await message.reply_text("Please Wait...!", quote = True)
     try:
