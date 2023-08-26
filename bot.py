@@ -24,12 +24,8 @@ class Bot(Client):
             bot_token=TG_BOT_TOKEN
         )
         self.LOGGER = LOGGER
-
-    async def start(self):
-        await super().start()
-        usr_bot_me = await self.get_me()
-        self.uptime = datetime.now()
-
+    
+    async def refresh_invite(self, raise_exit: bool = True):
         if FORCE_SUB_CHANNEL():
             try:
                 link = (await self.get_chat(FORCE_SUB_CHANNEL())).invite_link
@@ -42,7 +38,18 @@ class Bot(Client):
                 self.LOGGER(__name__).warning("Bot can't Export Invite link from Force Sub Channel!")
                 self.LOGGER(__name__).warning(f"Please Double check the FORCE_SUB_CHANNEL value and Make sure Bot is Admin in channel with Invite Users via Link Permission, Current Force Sub Channel Value: {FORCE_SUB_CHANNEL()}")
                 self.LOGGER(__name__).info("\nBot Stopped. Join https://t.me/CodeXBotzSupport for support")
-                sys.exit()
+                if raise_exit:
+                    sys.exit()
+                else:
+                    raise a
+
+    async def start(self):
+        await super().start()
+        usr_bot_me = await self.get_me()
+        self.uptime = datetime.now()
+
+        await self.refresh_invite()
+
         try:
             db_channel = await self.get_chat(CHANNEL_ID)
             self.db_channel = db_channel

@@ -10,11 +10,16 @@ from config import ADMINS, CHANNEL_ID, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
 from helper_func import encode
 
 @Bot.on_message(filters.private & filters.user(ADMINS) & filters.command("setforcesub"))
-async def setCommand(client: Client, message: Message):
+async def setCommand(client: Bot, message: Message):
     try:
         channel_id = message.text.split(maxsplit=1)[1]
     except IndexError:
         await message.reply_text("Provide a force sub id to update.")
+        return
+    try:
+        await client.refresh_invite(raise_exit=False)
+    except Exception as er:
+        await message.reply_text(f"{er}")
         return
     os.environ["FORCE_SUB_CHANNEL"] = channel_id
     await message.reply_text(f"Force Sub Updated to {channel_id}")
