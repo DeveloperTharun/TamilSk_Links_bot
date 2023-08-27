@@ -23,16 +23,21 @@ class Bot(Client):
             workers=TG_BOT_WORKERS,
             bot_token=TG_BOT_TOKEN
         )
+        self.invitelink = None
         self.LOGGER = LOGGER
     
-    async def refresh_invite(self, raise_exit: bool = True):
-        if FORCE_SUB_CHANNEL():
+    async def refresh_invite(self, channel=None, raise_exit: bool = True):
+        if not channel:
+            channel = FORCE_SUB_CHANNEL()
+        if channel:
+            print(channel)
             try:
-                link = (await self.get_chat(FORCE_SUB_CHANNEL())).invite_link
+                link = (await self.get_chat(channel)).invite_link
                 if not link:
-                    await self.export_chat_invite_link(FORCE_SUB_CHANNEL())
-                    link = (await self.get_chat(FORCE_SUB_CHANNEL())).invite_link
+                    await self.export_chat_invite_link(channel)
+                    link = (await self.get_chat(channel)).invite_link
                 self.invitelink = link
+                self.LOGGER(__name__).info(f"Created invite link: {self.invitelink}")
             except Exception as a:
                 self.LOGGER(__name__).warning(a)
                 self.LOGGER(__name__).warning("Bot can't Export Invite link from Force Sub Channel!")

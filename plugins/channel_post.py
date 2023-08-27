@@ -17,7 +17,7 @@ async def setCommand(client: Bot, message: Message):
         await message.reply_text("Provide a force sub id to update.")
         return
     try:
-        await client.refresh_invite(raise_exit=False)
+        await client.refresh_invite(int(channel_id), raise_exit=False)
     except Exception as er:
         await message.reply_text(f"{er}")
         return
