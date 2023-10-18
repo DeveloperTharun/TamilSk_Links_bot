@@ -13,7 +13,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             text = f"""<b>
 ╭────[ ᴛᴀᴍɪʟꜱᴋ ꜰɪʟᴇꜱ ]────⍟
 ├⍟ ʙᴏᴛ ɴᴀᴍᴇ : <a href='http://telegram.me/TamilSk_Files_Bot'>ᴛᴀᴍɪʟꜱᴋ ꜰɪʟᴇꜱ</a>
-├⍟ ᴏᴡɴᴇʀ : <a href='https://telegram.me/SKxTharun'>𝗦𝗞ㅤ〆ㅤͲʜ‌ᴀʀᴜɴ</a>
+├⍟ ᴏᴡɴᴇʀ : <a href='https://telegram.me/King_Tharun'>𝗦𝗞ㅤ〆ㅤͲʜ‌ᴀʀᴜɴ</a>
 ├⍟ ʟᴀɴɢᴜᴀɢᴇ : <a href='https://www.python.org/download/releases/3.0/'>ᴘʏᴛʜᴏɴ 3</a>
 ├⍟ ᴍᴏᴠɪᴇꜱ : <a href='https://telegram.me/TamilSk_Moviez'>ᴛᴀᴍɪʟꜱᴋ ᴍᴏᴠɪᴇᴢ</a>
 ├⍟ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://telegram.me/Rapid_Bots'>ʀᴀᴘɪᴅ ʙᴏᴛꜱ</a>
