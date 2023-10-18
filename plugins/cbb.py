@@ -10,7 +10,15 @@ async def cb_handler(client: Bot, query: CallbackQuery):
     data = query.data
     if data == "about":
         await query.message.edit_text(
-            text = f"<b>○ Creator : <a href='tg://user?id={OWNER_ID}'>This Person</a>\n○ Language : <code>English Sub & Dub</code>\n○ Library : <a href='https://t.me/anime_rtx'>Anime_hub {__version__}</a>\n○ Channel : @anime_rtx</b>",
+            text = f"""<b>
+╭────[ ᴛᴀᴍɪʟꜱᴋ ꜰɪʟᴇꜱ ]────⍟
+├⍟ ʙᴏᴛ ɴᴀᴍᴇ : <a href='http://telegram.me/TamilSk_Files_Bot'>ᴛᴀᴍɪʟꜱᴋ ꜰɪʟᴇꜱ</a>
+├⍟ ᴏᴡɴᴇʀ : <a href='https://telegram.me/SKxTharun'>𝗦𝗞ㅤ〆ㅤͲʜ‌ᴀʀᴜɴ</a>
+├⍟ ʟᴀɴɢᴜᴀɢᴇ : <a href='https://www.python.org/download/releases/3.0/'>ᴘʏᴛʜᴏɴ 3</a>
+├⍟ ᴍᴏᴠɪᴇꜱ : <a href='https://telegram.me/TamilSk_Moviez'>ᴛᴀᴍɪʟꜱᴋ ᴍᴏᴠɪᴇᴢ</a>
+├⍟ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://telegram.me/Rapid_Bots'>ʀᴀᴘɪᴅ ʙᴏᴛꜱ</a>
+├⍟ ᴍʏ ʙᴇsᴛ ꜰʀɪᴇɴᴅ : <a href='tg://settings'>ᴛʜɪs ᴘᴇʀsᴏɴ</a>
+╰────────────────────⍟</b>""",
             disable_web_page_preview = True,
             reply_markup = InlineKeyboardMarkup(
                 [
